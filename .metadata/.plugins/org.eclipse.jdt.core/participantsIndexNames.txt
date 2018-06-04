@@ -1,0 +1,7 @@
+INDEX VERSION 1.130
+F:\jee-oxygen\taotao\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2721289618.index
+\taotao-manager-web\src\main\java
+F:\jee-oxygen\taotao\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1083750738.index
+\taotao-manager-web\src\main\java
+F:\jee-oxygen\taotao\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2478377848.index
+\taotao-manager-service\src\main\java
