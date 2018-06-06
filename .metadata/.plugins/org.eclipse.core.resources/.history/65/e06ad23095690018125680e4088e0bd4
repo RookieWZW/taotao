@@ -1,0 +1,6 @@
+package com.taotao.service;
+
+public interface ItemCatService {
+	
+	List<EasyUITreeNode> getItemCatList(long parentId);
+}
