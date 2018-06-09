@@ -15,36 +15,34 @@ import com.taotao.pojo.TbContentCategory;
 import com.taotao.pojo.TbContentCategoryExample;
 import com.taotao.pojo.TbContentCategoryExample.Criteria;
 
-
 @Service
 public class ContentCategoryServiceImpl implements ContentCategoryService {
 
 	@Autowired
 	private TbContentCategoryMapper contentCategoryMapper;
-	
+
 	@Override
 	public List<EasyUITreeNode> getContentCategoryList(long parentId) {
 		// TODO Auto-generated method stub
 		TbContentCategoryExample example = new TbContentCategoryExample();
-		
-		
+
 		Criteria criteria = example.createCriteria();
-		
+
 		criteria.andParentIdEqualTo(parentId);
-		
+
 		List<TbContentCategory> list = contentCategoryMapper.selectByExample(example);
-		
+
 		List<EasyUITreeNode> resultList = new ArrayList<>();
-		
+
 		for (TbContentCategory tbContentCategory : list) {
 			EasyUITreeNode node = new EasyUITreeNode();
 			node.setId(tbContentCategory.getId());
 			node.setText(tbContentCategory.getName());
-			node.setState(tbContentCategory.getIsParent()?"closed":"open");
-			
+			node.setState(tbContentCategory.getIsParent() ? "closed" : "open");
+
 			resultList.add(node);
 		}
-		
+
 		return resultList;
 	}
 
@@ -52,61 +50,60 @@ public class ContentCategoryServiceImpl implements ContentCategoryService {
 	public TaotaoResult addContentCategory(Long parentId, String name) {
 		// TODO Auto-generated method stub
 		TbContentCategory contentCategory = new TbContentCategory();
-		
+
 		contentCategory.setParentId(parentId);
-		
+
 		contentCategory.setName(name);
-		
+
 		contentCategory.setStatus(1);
-		
+
 		contentCategory.setSortOrder(1);
-		
+
 		contentCategory.setIsParent(false);
-		
+
 		contentCategory.setCreated(new Date());
-		
+
 		contentCategory.setUpdated(new Date());
-		
+
 		contentCategoryMapper.insert(contentCategory);
-		
+
 		TbContentCategory parent = contentCategoryMapper.selectByPrimaryKey(parentId);
-		
-		
-		if(!parent.getIsParent()) {
+
+		if (!parent.getIsParent()) {
 			parent.setIsParent(true);
-			
+
 			contentCategoryMapper.updateByPrimaryKey(parent);
 		}
-		
+
 		return TaotaoResult.ok(contentCategory);
-		
+
 	}
-	
-	public TaotaoResult updateContentCategory(Long id,String name) {
+
+	public TaotaoResult updateContentCategory(Long id, String name) {
 		TbContentCategory contentCategory = contentCategoryMapper.selectByPrimaryKey(id);
-		
+
 		contentCategory.setName(name);
-		
+
 		contentCategoryMapper.updateByPrimaryKey(contentCategory);
-		
+
 		return TaotaoResult.ok();
 	}
+
 	public TaotaoResult deleteContentCategory(Long id) {
 		TbContentCategory contentCategory = contentCategoryMapper.selectByPrimaryKey(id);
-		
-		contentCategory.setStatus(2);
-		
-		contentCategoryMapper.updateByPrimaryKey(contentCategory);
-		
-		TbContentCategory parent = contentCategoryMapper.selectByPrimaryKey(contentCategory.getParentId());
-		
 
-		if(!parent.getIsParent()) {
+		contentCategory.setStatus(2);
+
+		contentCategoryMapper.updateByPrimaryKey(contentCategory);
+
+		TbContentCategory parent = contentCategoryMapper.selectByPrimaryKey(contentCategory.getParentId());
+
+		if (!parent.getIsParent()) {
 			parent.setIsParent(false);
-			
+
 			contentCategoryMapper.updateByPrimaryKey(parent);
 		}
-		
+
 		return TaotaoResult.ok();
 	}
 

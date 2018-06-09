@@ -12,19 +12,19 @@ import com.taotao.pojo.TbContent;
 
 @Service
 public class ContentServiceImpl implements ContentService {
-	
+
 	@Autowired
 	private TbContentMapper contentMapper;
-	
+
 	@Override
 	public TaotaoResult addContent(TbContent content) {
 		// TODO Auto-generated method stub
-		
+
 		content.setCreated(new Date());
 		content.setUpdated(new Date());
-		
+
 		contentMapper.insert(content);
-		
+
 		return TaotaoResult.ok();
 	}
 

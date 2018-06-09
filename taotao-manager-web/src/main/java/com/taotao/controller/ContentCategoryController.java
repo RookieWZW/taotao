@@ -26,33 +26,31 @@ public class ContentCategoryController {
 
 		return list;
 	}
-	
+
 	@RequestMapping("/content/category/create")
 	@ResponseBody
-	public TaotaoResult addContentCategory(Long parentId,String name) {
+	public TaotaoResult addContentCategory(Long parentId, String name) {
 		TaotaoResult result = contentCategoryService.addContentCategory(parentId, name);
-		
+
 		return result;
 	}
-	
+
 	@RequestMapping("/content/category/update")
 	@ResponseBody
-	public TaotaoResult updateContentCategory(Long id,String name) {
+	public TaotaoResult updateContentCategory(Long id, String name) {
 		TaotaoResult result = contentCategoryService.updateContentCategory(id, name);
-		
+
 		return result;
 	}
-	
+
 	@RequestMapping("/content/category/delete")
 	@ResponseBody
 	public TaotaoResult deleteContentcategory(Long id) {
-		
-		//TODO 删除未完成
+
+		// TODO 删除未完成
 		TaotaoResult result = contentCategoryService.deleteContentCategory(id);
-		
+
 		return result;
 	}
-	
-	
 
 }

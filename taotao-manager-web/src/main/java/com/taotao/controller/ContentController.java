@@ -14,15 +14,13 @@ public class ContentController {
 
 	@Autowired
 	private ContentService contentService;
-	
-	
+
 	@RequestMapping("/content/save")
 	@ResponseBody
 	public TaotaoResult addContent(TbContent content) {
 		TaotaoResult result = contentService.addContent(content);
-		
+
 		return result;
 	}
-	
-	
+
 }
