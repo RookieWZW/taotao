@@ -22,5 +22,15 @@ public class ContentController {
 
 		return result;
 	}
+	
+	@RequestMapping("/content/edit")
+	@ResponseBody
+	public TaotaoResult editContent(TbContent content) {
+		TaotaoResult result = contentService.updateContent(content);
+		
+		return result;
+	}
+	
+	
 
 }
