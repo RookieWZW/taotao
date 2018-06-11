@@ -15,6 +15,6 @@ public interface ContentService {
 	TaotaoResult deleteContent(TbContent content);
 	
 	
-	List<TbContent> getContentByCid(Long cid);
+	List<TbContent> getContentByCid(long cid);
 	
 }

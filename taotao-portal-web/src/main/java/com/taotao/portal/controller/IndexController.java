@@ -34,11 +34,10 @@ public class IndexController {
 	
 	@RequestMapping("/index")
 	public String showIndex(Model model) {
-		
+		//根据cid查询轮播图内容列表
 		List<TbContent> contentList = contentService.getContentByCid(AD1_CATEGORY_ID);
-		
+		//把列表转换为Ad1Node列表
 		List<AD1Node> ad1Nodes = new ArrayList<>();
-		
 		for (TbContent tbContent : contentList) {
 			AD1Node node = new AD1Node();
 			node.setAlt(tbContent.getTitle());
@@ -49,14 +48,13 @@ public class IndexController {
 			node.setSrc(tbContent.getPic());
 			node.setSrcB(tbContent.getPic2());
 			node.setHref(tbContent.getUrl());
-			
+			//添加到节点列表
 			ad1Nodes.add(node);
 		}
-		
-		String ad1Josn = JsonUtils.objectToJson(ad1Nodes);
-		
-		model.addAttribute("ad1", ad1Josn);
-		
+		//把列表转换成json数据
+		String ad1Json = JsonUtils.objectToJson(ad1Nodes);
+		//把json数据传递给页面
+		model.addAttribute("ad1", ad1Json);
 		return "index";
 	}
 }
